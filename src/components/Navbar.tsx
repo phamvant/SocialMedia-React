@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import MailIcon from "@mui/icons-material/Mail";
 import {
   AppBar,
+  Autocomplete,
   Avatar,
   Badge,
   Box,
@@ -14,6 +15,7 @@ import {
   MenuList,
   Paper,
   Popper,
+  TextField,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -26,6 +28,7 @@ import { theme } from "../theme";
 import {
   Favorite,
   Logout,
+  NoEncryption,
   Notifications,
   PersonAdd,
   Settings,
@@ -36,12 +39,22 @@ const StyledToolbar = styled(Toolbar)({
   justifyContent: "space-between",
 });
 
-const SeachBox = styled("div")({
-  backgroundColor: "white",
+const SeachBox = styled(Autocomplete)({
   padding: "0 10px",
   borderRadius: "10px",
   width: "40% ",
 });
+
+const SearchTextField = styled(TextField)`
+  & label.Mui-default {
+    color: white;
+  }
+  & .MuiOutlinedInput-root {
+    &.Mui-focused fieldset {
+      border-color: white;
+    }
+  }
+`;
 
 const Icons = styled(Box)({
   display: "none",
@@ -61,10 +74,9 @@ const UserBox = styled(Box)({
   },
 });
 
-const Navbar = () => {
+const Navbar = (topFilm: any) => {
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuOpen, setOpen] = useState(false);
-
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -75,9 +87,22 @@ const Navbar = () => {
           1st Prj
         </Typography>
         <MenuIcon sx={{ display: { xs: "block", sm: "none" } }} />
-        <SeachBox>
-          <InputBase placeholder="Search..." />
-        </SeachBox>
+        <SeachBox
+          freeSolo
+          id="free-solo-2-demo"
+          disableClearable
+          options={topFilm.topFilm.map((option: any) => option.label)}
+          renderInput={(params) => (
+            <SearchTextField
+              {...params}
+              label="Search input"
+              InputProps={{
+                ...params.InputProps,
+                type: "search",
+              }}
+            />
+          )}
+        ></SeachBox>
         <Icons ref={anchorRef} gap={0}>
           <IconButton>
             <Badge color="error" variant="dot" sx={{ cursor: "pointer" }}>

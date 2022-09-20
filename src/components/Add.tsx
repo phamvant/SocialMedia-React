@@ -20,6 +20,7 @@ const StyledModal = styled(Modal)({
 
 const Add = () => {
   const [addPopup, showPopup] = useState(false);
+  const [value, setValue] = useState("");
 
   return (
     <>
@@ -43,8 +44,7 @@ const Add = () => {
         aria-describedby="modal-modal-description"
       >
         <Box
-          width={600}
-          height={200}
+          sx={{ width: { md: 600, xs: 300 }, height: { md: 200, xs: 200 } }}
           bgcolor="white"
           padding={3}
           borderRadius={5}
@@ -53,6 +53,7 @@ const Add = () => {
             Create Post
           </Typography>
           <TextField
+            onChange={(e) => setValue(e.target.value)}
             sx={{ position: "relative", top: "20%" }}
             fullWidth
             multiline
@@ -62,7 +63,11 @@ const Add = () => {
             variant="standard"
           />
           <ButtonGroup
-            sx={{ position: "relative", top: "35%", left: "70%" }}
+            sx={{
+              position: "relative",
+              top: { md: "35%", xs: "40%" },
+              left: { md: "70%", xs: "25%" },
+            }}
             disableElevation
             variant="contained"
             aria-label="Disabled elevation buttons"
