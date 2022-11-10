@@ -34,6 +34,9 @@ import {
   Settings,
 } from "@mui/icons-material";
 
+import { selectCount } from "../features/counter/counterSlide";
+import { useSelector } from "react-redux";
+
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
@@ -46,7 +49,7 @@ const SeachBox = styled(Autocomplete)({
 });
 
 const SearchTextField = styled(TextField)`
-  & label.Mui-default {
+  & label.Mui-focused {
     color: white;
   }
   & .MuiOutlinedInput-root {
@@ -77,6 +80,8 @@ const UserBox = styled(Box)({
 const Navbar = (topFilm: any) => {
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuOpen, setOpen] = useState(false);
+  const count = useSelector(selectCount);
+
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -84,7 +89,7 @@ const Navbar = (topFilm: any) => {
           variant="h6"
           sx={{ display: { xs: "none", sm: "block", color: "white" } }}
         >
-          1st Prj
+          {count}
         </Typography>
         <MenuIcon sx={{ display: { xs: "block", sm: "none" } }} />
         <SeachBox

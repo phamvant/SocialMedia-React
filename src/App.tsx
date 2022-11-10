@@ -18,6 +18,7 @@ import Feed from "./components/Feed";
 import { Box, Container, Stack } from "@mui/system";
 import { theme } from "./theme";
 import Add from "./components/Add";
+import Counter from "./components/Counter";
 
 function App() {
   const characters = [
@@ -95,6 +96,7 @@ function App() {
         <Rightbar />
       </Stack>
       <Add />
+      <Counter />
     </Box>
   );
 }
